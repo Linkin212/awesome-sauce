@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour
     public bool atktime = false; 
     public float atklength = 0.5f;
     public bool atktimerstart = false;
+    public bool atkgoing = false;
 
     private void Start()
     {
@@ -31,7 +32,7 @@ public class Enemy : MonoBehaviour
         {
             atktimerstart = true;
         }
-        if (atktimerstart == true)
+        if (atktimerstart == true && atkgoing == false)
         {
             attacktimer += Time.deltaTime;
         }
@@ -51,14 +52,14 @@ public class Enemy : MonoBehaviour
                     Vector3 offset = new Vector3(1.5f, 0, 0);
                     Vector3 directions = (player.transform.position + offset - transform.position).normalized;
                     transform.Translate(directions * speed * Time.deltaTime);
-                    transform.localScale = new Vector3(1, 2.1669f);
+                    transform.localScale = new Vector3(0.055701f, 2.1669f);
                 }
                 if (direction.x >= 0)
                 {
                     Vector3 offset = new Vector3(-1.5f, 0, 0);
                     Vector3 directions = (player.transform.position + offset - transform.position).normalized;
                     transform.Translate(directions * speed * Time.deltaTime);
-                    transform.localScale = new Vector3(-1, 2.1669f);
+                    transform.localScale = new Vector3(-0.055701f, 2.1669f);
                 }
             }
         }
@@ -71,11 +72,14 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log("Attacking now");
             attack();
+            setrandomcooldown();
+            atkgoing = true;
         }
-        if (attackcooldown > 2f)
+        if (attackcooldown > 2)
         {
             parry = true;
         }
+
         if (atimer == true)
         {
             timer -= Time.deltaTime;
@@ -86,7 +90,6 @@ public class Enemy : MonoBehaviour
                 atktime = true;
                 atimer = false;
                 timer = 0.5f;
-                setrandomcooldown();
             }
         }
         if (atktime == true)
@@ -98,7 +101,7 @@ public class Enemy : MonoBehaviour
             atktime = false;
             TurnOffCircle();
             atklength = 0.5f;
-
+            atkgoing = false;
         }
     }
 
@@ -113,11 +116,7 @@ public class Enemy : MonoBehaviour
         }
         if (collision.CompareTag("PlayerHB") && parry == true)
         {
-            setrandomcooldown();
-            hit = true;
             parry = false;
-            Invoke("iframes", 0.3f);
-            
         }
     }
     void setrandomcooldown()
@@ -129,6 +128,7 @@ public class Enemy : MonoBehaviour
     {
         sr.color = Color.red;
         atimer = true;
+        atkgoing = true;
     }
     void iframes()
     {

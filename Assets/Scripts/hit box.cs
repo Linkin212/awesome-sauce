@@ -21,5 +21,16 @@ public class hitbox : MonoBehaviour
                 IsPlayerDead = true;
             }
         }
+        if (collision.gameObject.tag == "Player" && collision.gameObject.GetComponent<powboompow>().parrywindow == true)
+        {
+            Debug.Log("Parried");
+            //if the player parries the enemy they start a cooldown
+            collision.gameObject.GetComponent<powboompow>().parrycdactive = true;
+            collision.gameObject.GetComponent<powboompow>().parrycd = 3f;
+            //and the enemy is stunned for a short time
+            GameObject enemy = GameObject.FindWithTag("Enemy");
+            enemy.GetComponent<Enemy>().atkgoing = true;
+            enemy.GetComponent<Enemy>().atktime = true;
+        }
     }
 }

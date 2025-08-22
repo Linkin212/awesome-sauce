@@ -40,6 +40,15 @@ public class Schmooove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded())
         {
             rb.velocity = new UnityEngine.Vector2(rb.velocity.x, jumpPower);
+            an.SetBool("isjumping", true);
+        }
+        if (!isGrounded())
+        {
+            an.SetBool("isjumping", true);
+        }
+        else
+        {
+            an.SetBool("isjumping", false);
         }
 
         if (moveInput == 0)

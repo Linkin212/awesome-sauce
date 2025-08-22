@@ -5,7 +5,7 @@ using UnityEngine;
 public class powboompow : MonoBehaviour
 {
     public bool parrywindow = false;
-    public float parrytime = 1.5f;
+    public float parrytime = .5f;
     public float parrycd = 3;
     public bool parrycdactive = false;
     public int Health = 3;
@@ -23,7 +23,7 @@ public class powboompow : MonoBehaviour
         //} 
 
         //attack button
-        if (Input.GetKeyDown(KeyCode.Mouse0) && parrywindow == false)
+        if (Input.GetKeyDown(KeyCode.J) && parrywindow == false)
         {
             TurnOnCircle();
             atktimer = true;
@@ -44,7 +44,7 @@ public class powboompow : MonoBehaviour
         }
 
         //start of the parry makes sure a parry isnt currently happening
-        if (Input.GetKeyDown(KeyCode.F) && parrycdactive == false && parrywindow == false)
+        if (Input.GetKeyDown(KeyCode.K) && parrycdactive == false && parrywindow == false)
         {
             //starts the parry
             parrywindow = true;
@@ -63,7 +63,7 @@ public class powboompow : MonoBehaviour
             //ends the parry and starts the cooldown alse resets the parry time
             parrywindow = false;
             parrycdactive = true;
-            parrytime = 1.5f;
+            parrytime = .5f;
         }
         
         //starts parry cooldown timer
