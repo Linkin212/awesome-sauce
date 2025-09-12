@@ -14,6 +14,7 @@ public class Schmooove : MonoBehaviour
     public bool startlerp = false;
     public float targetvalue = 5;
     public float lerpspeed = 2f;
+    public bool cansprint = true;
 
     private void Start()
     {
@@ -59,10 +60,11 @@ public class Schmooove : MonoBehaviour
             rb.velocity = new UnityEngine.Vector2(0, rb.velocity.y);
             an.SetBool("ismoving", false);
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && cansprint == true)
         {
             speed = 13;
             startlerp = true;
+            cansprint = false;
         }
         if (startlerp == true && isGrounded())
         {
@@ -72,6 +74,7 @@ public class Schmooove : MonoBehaviour
         {
             startlerp = false;
             speed = 5;
+            cansprint = true;
         }
 
     }
