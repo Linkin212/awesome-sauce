@@ -7,15 +7,17 @@ public class fallingplatform : MonoBehaviour
     public Rigidbody2D rb;
     public bool wait = false;
     public float fallTime = 1.0f;
+    public Transform tpoint;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0.5f;
         rb.bodyType = RigidbodyType2D.Static;
+        transform.position = tpoint.transform.position;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
@@ -32,9 +34,15 @@ public class fallingplatform : MonoBehaviour
             {
                 rb.bodyType = RigidbodyType2D.Dynamic;
                 wait = false;
-
+                Invoke("Reset", 2f);
+                fallTime = 1.0f;
             }
         }
+    }
+    void Reset()
+    {
+        rb.bodyType = RigidbodyType2D.Static;
+        transform.position = tpoint.transform.position;
     }
 }
 

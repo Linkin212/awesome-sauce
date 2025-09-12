@@ -52,14 +52,14 @@ public class Enemy : MonoBehaviour
                     Vector3 offset = new Vector3(1.5f, 0, 0);
                     Vector3 directions = (player.transform.position + offset - transform.position).normalized;
                     transform.Translate(directions * speed * Time.deltaTime);
-                    transform.localScale = new Vector3(0.055701f, 2.1669f);
+                    transform.localScale = new Vector3(1f, 2.1669f);
                 }
                 if (direction.x >= 0)
                 {
                     Vector3 offset = new Vector3(-1.5f, 0, 0);
                     Vector3 directions = (player.transform.position + offset - transform.position).normalized;
                     transform.Translate(directions * speed * Time.deltaTime);
-                    transform.localScale = new Vector3(-0.055701f, 2.1669f);
+                    transform.localScale = new Vector3(-1f, 2.1669f);
                 }
             }
         }

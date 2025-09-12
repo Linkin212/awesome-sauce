@@ -11,6 +11,9 @@ public class Schmooove : MonoBehaviour
     public Transform groundCheck;
     public LayerMask groundLayer;
     public Animator an;
+    public bool startlerp = false;
+    public float targetvalue = 5;
+    public float lerpspeed = 2f;
 
     private void Start()
     {
@@ -56,6 +59,21 @@ public class Schmooove : MonoBehaviour
             rb.velocity = new UnityEngine.Vector2(0, rb.velocity.y);
             an.SetBool("ismoving", false);
         }
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            speed = 13;
+            startlerp = true;
+        }
+        if (startlerp == true && isGrounded())
+        {
+            speed = Mathf.Lerp(speed, targetvalue, Time.deltaTime * lerpspeed);
+        }
+        if (speed <= 5.9f)
+        {
+            startlerp = false;
+            speed = 5;
+        }
+
     }
     bool isGrounded()
     {

@@ -5,7 +5,7 @@ using UnityEngine;
 public class powboompow : MonoBehaviour
 {
     public bool parrywindow = false;
-    public float parrytime = .5f;
+    public float parrytime = .2f;
     public float parrycd = 3;
     public bool parrycdactive = false;
     public int Health = 3;
@@ -13,6 +13,7 @@ public class powboompow : MonoBehaviour
     public float atklength = 0.5f;
     public bool atktimer = false;
     public Animator an;
+    public bool Hit = false;
 
     void Update()
     {
@@ -63,7 +64,7 @@ public class powboompow : MonoBehaviour
             //ends the parry and starts the cooldown alse resets the parry time
             parrywindow = false;
             parrycdactive = true;
-            parrytime = .5f;
+            parrytime = .2f;
         }
         
         //starts parry cooldown timer
@@ -77,6 +78,10 @@ public class powboompow : MonoBehaviour
         {
             parrycdactive = false;
             parrycd = 3;
+        }
+        if (Hit == true)
+        {
+            Invoke("ResetHit", 0.3f);
         }
 
     }
@@ -94,5 +99,9 @@ public class powboompow : MonoBehaviour
     void TurnOffCircle() 
     {
         circle.SetActive(false);
+    }
+    void ResetHit()
+    {
+        Hit = false;
     }
 }

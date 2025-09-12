@@ -10,7 +10,6 @@ public class Vault : MonoBehaviour
     public bool CD = false;
     public float CDtimer = 2;
     public bool nearwall = false;
-    public bool climb = false;
     public int launch = 8;
     public Animator an;
 
@@ -33,7 +32,7 @@ public class Vault : MonoBehaviour
         }
         //if the player is next to a wall and can climb and the cool down is over they stick
         // to the wall and can vault by pressing space
-        if (nearwall == true && climb == true && CD == false)
+        if (nearwall == true && CD == false)
         {
             isHanging = true;
             an.SetBool("ishanging", true);
@@ -55,27 +54,17 @@ public class Vault : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        //when the player walks away from the wall it turns off the ability to climb
-        nearwall = false;
-        climb = false;
-
+        if (collision.CompareTag("Floor"))
+        {
+            nearwall = false;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //says the player is near a wall and checks for the layer of the object
-        nearwall = true;
-        if (collision.gameObject.layer == LayerMask.NameToLayer("floor"))
+        if (collision.CompareTag("Floor"))
         {
-            //this grabs the walls y position and the players y position and compares them
-            //if the players y position is higher then it allows for climbing if not climbing doesnt happen
-            float yfloor = collision.transform.position.y;
-            GameObject player = GameObject.FindWithTag("Player");
-            float yplayer = player.transform.position.y;
-            if (yplayer > yfloor)
-            {
-                climb = true;
-            }
+            nearwall = true;
         }
     }
 }

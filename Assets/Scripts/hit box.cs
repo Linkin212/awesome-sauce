@@ -10,10 +10,11 @@ public class hitbox : MonoBehaviour
         //this is the codefor the hit boxes
 
         //if the collision is the player and they didnt parry they loose hp
-        if (collision.gameObject.tag == "Player" && collision.gameObject.GetComponent<powboompow>().parrywindow == false)
+        if (collision.gameObject.tag == "Player" && collision.gameObject.GetComponent<powboompow>().parrywindow == false && collision.gameObject.GetComponent<powboompow>().Hit == false)
         {
             Debug.Log("Hit Player");
             collision.gameObject.GetComponent<powboompow>().Health -= 1;
+            collision.gameObject.GetComponent<powboompow>().Hit = true;
             //once player hp reaches zero they die
             if (collision.gameObject.GetComponent<powboompow>().Health <= 0)
             {
@@ -24,8 +25,8 @@ public class hitbox : MonoBehaviour
         if (collision.gameObject.tag == "Player" && collision.gameObject.GetComponent<powboompow>().parrywindow == true)
         {
             Debug.Log("Parried");
-            //if the player parries the enemy they start a cooldown
-            collision.gameObject.GetComponent<powboompow>().parrycdactive = true;
+            //if the player parries the enemy they get their parry back
+            collision.gameObject.GetComponent<powboompow>().parrycdactive = false;
             collision.gameObject.GetComponent<powboompow>().parrycd = 3f;
             //and the enemy is stunned for a short time
             GameObject enemy = GameObject.FindWithTag("Enemy");
