@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
 public class powboompow : MonoBehaviour
@@ -14,6 +15,10 @@ public class powboompow : MonoBehaviour
     public bool atktimer = false;
     public Animator an;
     public bool Hit = false;
+    public Transform tp1;
+    public Transform tp2;
+    public Transform tp3;
+    public int currenttp = 0;
 
     void Update()
     {
@@ -82,6 +87,21 @@ public class powboompow : MonoBehaviour
         if (Hit == true)
         {
             Invoke("ResetHit", 0.3f);
+        }
+        if (Health <= 0)
+        {
+            if (currenttp == 1)
+            {
+                transform.position = tp1.position;
+            }
+            else if (currenttp == 2)
+            {
+                transform.position = tp2.position;
+            }
+            else if (currenttp == 3)
+            {
+                transform.position = tp3.position;
+            }
         }
 
     }
