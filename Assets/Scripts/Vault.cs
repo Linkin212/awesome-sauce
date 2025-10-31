@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.WSA;
+//using UnityEngine.WSA;
 
 public class Vault : MonoBehaviour
 {
     public bool isHanging = false;
     public Rigidbody2D rb;
     public bool CD = false;
-    public float CDtimer = 2;
+    public float CDtimer = 1;
     public bool nearwall = false;
     public int launch = 8;
     public Animator an;
